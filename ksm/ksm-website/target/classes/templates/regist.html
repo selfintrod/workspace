@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>RegistPage</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+<style>
+    html, body{height: 100%;margin: 0px;padding: 0px;}
+    .layui-fluid
+    {
+    width: 420px;
+      			height: 320px;
+		 		 min-height: 320px;  
+		 		 max-height: 320px;  
+		 		 position: absolute;   
+		 		 top: 0;  
+		 		 left: 0;  
+		 		 bottom: 0;  
+		 		 right: 0;  
+		 		 margin: auto;  
+		 		 padding: 20px;   
+		 		 z-index: 130;  
+		 		 border-radius: 0px;  
+		 		 background-color: #fff;  
+		 		 box-shadow: 0 3px 18px rgba(0, 0, 0, .5); 
+		 		 font-size: 16px;
+  
+    }
+            </style>
+</head>
+<body>
+<div class="layui-fluid">
+<div class="layui-row">
+    <div class="layui-col">
+   <form class="layui-form" th:action="@{http://localhost:8080/ksm/regist}" name="ksmUser" th:method="post">
+  <div class="layui-form-item" style="width: 80%;width: 80%;margin-top: 50px;margin-left:-30px;">
+   <label class="layui-form-label"><i class="layui-icon layui-icon-username" style="font-size: 32px; color:#FFB800;"></i></label>
+    <div class="layui-input-block" style="width: 80%;">
+      <input type="text" name="userName" required lay-verify="required" autocomplete="off" placeholder="请输入用户名" class="layui-input"> 
+    </div>
+  </div>
+  <div class="layui-form-item" style="width: 80%;margin-top: 30px;margin-left:-30px;">
+   <label class="layui-form-label"><i class="layui-icon layui-icon-password" style="font-size: 32px; color: #FFB800;"></i></label>
+    <div class="layui-input-block" style="width: 80%;"> 
+      <input type="password" name="passWord" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+ <div class="layui-form-item" style="width: 80%;width: 80%;margin-top: 30px;margin-left:-30px;">
+   <label class="layui-form-label"><i class="layui-icon layui-icon-username" style="font-size: 32px; color:#FFB800;"></i></label>
+    <div class="layui-input-block" style="width: 80%;">
+      <input type="text" name="id" required lay-verify="required" autocomplete="off" placeholder="请输入id" class="layui-input"> 
+    </div>
+  </div>
+  <div class="layui-form-item" style="width: 90%;margin-top: 20px;margin-left:-30px;">
+    <div class="layui-input-block" >
+      <button class="layui-btn" style="width: 100%;" lay-submit >提交</button>
+    </div>
+   </div>
+</form>
+    </div>
+    </div>
+    </div>
+<script th:src="@{/layui/layui.js}"></script>
+<script>
+//一般直接写在一个js文件中
+layui.use(['layer', 'form'], function(){
+  var layer = layui.layer
+  ,form = layui.form;
+});
+</script> 
+</body>
+</html>

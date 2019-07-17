@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+layout:decorator="layout/default">
+<head>
+<title>adminPage</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+  <ul class="layui-tab-title">
+    <li class="layui-this">用户管理</li>
+    <li>角色管理</li>   
+    <li>待定</li>
+  </ul>
+<div class="layui-tab-content">
+  <div class="layui-tab-item layui-show">
+   <script th:src="@{/ksm/admin.js}"></script>
+   <script th:src="@{/layui/lay/modules/layer.js}"></script>
+   <table class="layui-hide" id="userTable" lay-filter="userTable"></table> 
+   <script type="text/html" id="editToolBar">
+    <div class="layui-btn-container">
+     <button class="layui-btn layui-btn-sm" lay-event="addUser">新增</button>
+     <button class="layui-btn layui-btn-sm" lay-event="authen">授权</button>
+    </div>
+   </script>
+   <script type="text/html" id="userBar">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+   </script>
+  </div>
+  <div class="layui-tab-item">角色管理</div>
+  <div class="layui-tab-item">内容3</div>
+
+</div>
+</div>
+</div> 
+</body>
+</html>
