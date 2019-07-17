@@ -15,6 +15,7 @@ layui.define(['layer','element','table','tree'], function(){
                 xhrFields: {
                     withCredentials: true
                   },
+                  crossDomain: true, 
                 async : true,              
             success:function(data)
             {
