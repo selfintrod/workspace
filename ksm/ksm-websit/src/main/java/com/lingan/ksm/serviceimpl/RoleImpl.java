@@ -17,9 +17,10 @@ public class RoleImpl extends BaseServiceImpl<RoleMapper,ksmRole> implements Rol
 	
     @Override
 	public int saveRole(ksmRole role) {
-		if(this.saveOrUpdate(role))
-			return 1;
-		return 0;
+    	    	
+    	if(this.saveOrUpdate(role))
+    		return 1;
+    	return 0;
 	}
 	
 	public void Userinit(String username)
@@ -72,5 +73,13 @@ public class RoleImpl extends BaseServiceImpl<RoleMapper,ksmRole> implements Rol
 	public List<ksmRole> getRolesByUserName(String userName)
 	{
 		return rm.findRolesByUserName(userName);
+	}
+
+	@Override
+	public int deleteRoleById(Integer roleId) {
+		// TODO Auto-generated method stub
+		if(this.removeById(roleId))
+		return 1;
+		return 0;
 	}
 }

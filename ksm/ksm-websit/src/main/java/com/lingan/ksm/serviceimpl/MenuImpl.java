@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lingan.ksm.entity.ksmMenu;
 import com.lingan.ksm.mapper.MenuMapper;
 import com.lingan.ksm.model.menuModel;
+import com.lingan.ksm.model.menuTree;
 import com.lingan.ksm.service.MenuService;
 
 @Service
@@ -111,4 +112,52 @@ public class MenuImpl extends BaseServiceImpl<MenuMapper,ksmMenu> implements Men
 		
 	}
 
+	@Override
+	public List<menuTree> getMenuTree() {
+		
+		//获得所有菜单
+		List<ksmMenu> menus=this.list();	
+		
+		List<menuTree> models=new ArrayList<>();	   
+		//循环找出菜单根节点		
+		for(ksmMenu menu:menus)
+	    {
+			if(menu.getParentId()==0)
+	    	{	
+	    		models.add(new menuTree(menu));
+	    	}
+	    }
+		
+		//System.out.print("根节点"+models);
+		
+	    for(menuTree model:models)
+	    {
+	        List<menuTree> child=getMenuChildren(model.getId(),menus);
+	    	model.setChildren(child);	      
+	    }
+	   // System.out.print("树已完成"+models);
+		return models;
+	}
+
+	public List<menuTree> getMenuChildren(Integer Pid,List<ksmMenu> menus)
+	{
+		List<menuTree> children=new ArrayList<>();			
+			
+		for(ksmMenu menu:menus)
+			{
+				if(menu.getParentId().equals(Pid))				
+				{				
+					children.add(new menuTree(menu));								
+				}	
+			}
+						
+			for(menuTree model:children)			 
+			  {							
+			        model.setChildren(getMenuChildren(model.getId(), menus));
+			  }			 
+		
+		if(children.size()==0)
+			return new ArrayList<menuTree>();
+		return children;
+	}
 }

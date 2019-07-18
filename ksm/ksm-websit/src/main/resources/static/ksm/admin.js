@@ -6,7 +6,8 @@ layui.define(['transfer','layer','element','table'], function(){
   ,transfer=layui.transfer
   ,element=layui.element
   ,table=layui.table;
- 
+
+  
  function getRoles(tableName)
  {
 	//ajax获取所有角色，初始化select

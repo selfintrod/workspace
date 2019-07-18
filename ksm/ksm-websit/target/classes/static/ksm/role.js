@@ -154,7 +154,12 @@ table.render({
               		  var roleName=$("#RroleName").val();
               		  var roleId=$("#RroleId").val();
               		  var roleDes=$('#RroleDes').val();
-              		  var menus=Menus.toString();
+              		 // var _List={};
+              		  //for(var i=0;i<Menus.length;i++)
+              		//	{
+              			//  _List[i]=Menus[i];             			  
+              			//  }
+              		  menus=JSON.stringify(Menus);
               		  if(roleName.length===0||roleId.length===0|roleDes.length===0)
               			  {
               		  layer.msg("重新填写");
@@ -212,7 +217,7 @@ table.render({
     	  $.ajax(
                 {
                     type: 'GET',
-                    url: "http://localhost:8080/ksm/admin/roleDelete",
+                    url: "http://localhost:8080/ksm/admin/deleteRole",
                     dataType: 'json',  
                     async : true,
                     data: { 
@@ -255,9 +260,14 @@ table.render({
               		       ,id: 'REmenu'
               		       ,oncheck: function(obj){
               		    	     //测试被选节点
-              		    	  var checkData = tree.getChecked('REmenu');
-              		    	  console.log(checkData); 
-              		    	
+              		    	  var checkData = tree.getChecked('REmenu');              		    	                		    	       		    	       
+              		    	  var tempMenus= [];        		    	 
+          		    	      if(checkData.length!=0)
+          		    		  for(var i=0;i<checkData.length;i++)
+          		    		  {               		    			 
+          		    			tempMenus.push.apply(tempMenus,getChildren(checkData[i]));
+          		    		  }
+          		    	        Menus=tempMenus;   
               		          // console.log(obj.checked); //得到当前节点的展开状态：open、close、normal
               		         // console.log(obj.elem); //得到当前节点元素              		    
               		    	  }
@@ -291,9 +301,10 @@ table.render({
           	      yes: function(index, layero)
           	      {
           		    //按钮【按钮一】的回调
-          		    var roleName=$("#roleName").val();
+          		    var roleName=$("#EroleName").val();
           		    var roleId=data.roleId;
           		    var roleDes=$("#EroleDes").val();
+          		    var menus=JSON.stringify(Menus);
           		    if(roleName.length===0||roleDes.length===0)
           			  {
           		            layer.msg("重新填写");
@@ -308,7 +319,7 @@ table.render({
           	                    	'roleName' : roleName,
           	                    	'roleDes':roleDes,
           	                    	'roleId':roleId,
-          	                    	//'menus': menus,
+          	                    	'menus': menus,
           	                    	//'arrayList' : JSON.stringify(row)  //把数据转换为json格式字符串
           	                },
           	                success:function(req)

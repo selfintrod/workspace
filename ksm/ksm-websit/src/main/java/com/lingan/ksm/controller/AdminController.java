@@ -20,6 +20,7 @@ import com.lingan.ksm.entity.ksmRole;
 import com.lingan.ksm.entity.ksmUser;
 import com.lingan.ksm.model.UserModel;
 import com.lingan.ksm.model.menuModel;
+import com.lingan.ksm.model.menuTree;
 import com.lingan.ksm.service.MenuService;
 import com.lingan.ksm.service.RoleService;
 import com.lingan.ksm.service.UserModelService;
@@ -187,6 +188,22 @@ public String showMenus()
 }
 
 @ResponseBody
+@GetMapping("/showMenuTree")
+public String menusTrees()
+{
+	JSONObject obj=new JSONObject();
+ List<menuTree> models=ms.getMenuTree();
+ if(models.size()!=0)
+		obj.put("code","200");
+	else obj.put("code","400");
+	obj.put("msg","");
+	obj.put("count","1000");
+	obj.put("data",models);
+	return obj.toJSONString();
+	
+}
+
+@ResponseBody
 @GetMapping("/showMenuModels")
 public String showMenusModels()
 {
@@ -242,10 +259,14 @@ public Map<String, String> deleteMenu(@RequestParam("menuId") Integer menuId)
 public Map<String, String> saveRole(@RequestParam("roleName") String roleName,
 		@RequestParam("roleDes") String roleDes,
 		@RequestParam("roleId") Integer roleId,
-		@RequestParam("menus") List<Integer> menus)
+		@RequestParam("menus") String Smenus)
 {
+	
+	List<Integer> menus=JSON.parseArray(Smenus, Integer.class);
+	//System.out.print(menus);
 	Map<String, String> map = new HashMap<>();
 	ksmRole role=new ksmRole(roleId,roleName,roleDes);
+	System.out.print(roleId+roleName+roleDes);
 	if(rs.saveRole(role)==0)
 	map.put("code", "400");
 	else {
@@ -258,6 +279,36 @@ public Map<String, String> saveRole(@RequestParam("roleName") String roleName,
 	}
 	
 	return map;
+}
+
+@ResponseBody
+@GetMapping("/deleteRole")
+public Map<String, String> deleteRole(@RequestParam("roleId") Integer roleId)
+{
+	Map<String, String> map = new HashMap<>();
+	if(rs.deleteRoleById(roleId)==1)
+			map.put("code","200");
+		else map.put("code","400");
+
+				
+	return map;
+}
+
+
+@ResponseBody
+@GetMapping("/showMenuTrees")
+public String showMenusTrees()
+{
+	JSONObject obj=new JSONObject();
+ List<menuTree> models=ms.getMenuTree();
+ if(models.size()!=0)
+		obj.put("code","200");
+	else obj.put("code","400");
+	obj.put("msg","");
+	obj.put("count","1000");
+	obj.put("data",models);
+	return obj.toJSONString();
+	
 }
 
 }
