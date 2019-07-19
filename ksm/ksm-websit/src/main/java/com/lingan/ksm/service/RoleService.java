@@ -17,4 +17,5 @@ public interface RoleService extends IService<ksmRole>{
 	public int addRole2User(Integer userId,Integer roleId);
 	public List<ksmRole> getRolesByUserName(String userName);
 	public int deleteRoleById(Integer roleId);
+
 }

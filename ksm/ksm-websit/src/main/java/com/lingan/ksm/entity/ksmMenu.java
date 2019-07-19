@@ -96,11 +96,11 @@ public class ksmMenu implements Serializable{
 		this.Url=Url;
 	}
 
-	//@Override
-	//public String toString()
-	//{
-//		return "[菜单id"+this.id+"菜单名"+this.menuName+"菜单描述"+this.menuDes+"菜单url"+this.Url+"父菜单id"+this.parentId+"]";
-//	}
+	@Override
+	public String toString()
+	{
+		return "[菜单id"+this.id+"菜单名"+this.menuName+"菜单描述"+this.menuDes+"菜单url"+this.Url+"父菜单id"+this.parentId+"]";
+	}
 	
 }
 

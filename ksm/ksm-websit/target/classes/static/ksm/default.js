@@ -3,9 +3,18 @@ layui.define(['transfer','layer','element','table'], function(){
   ,layer = layui.layer
   ,element=layui.element
 ;
-  
-getMenus();
-console.log('菜单的dom为'+$('#menus').html());
+  //getMenus();
+  if(res!=null)
+	  {
+	  var html=showMenus(res.userMenus,'layui-nav layui-layout-left');
+	  $("#"+"menus").append(html);
+	    element.init('nav');
+	  console.log('菜单的dom为'+$('#menus').html());
+	  }
+  else
+	  {
+	  getMenus();
+	  };
  
 
 /*$.ajaxSetup({

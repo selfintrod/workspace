@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lingan.ksm.entity.ksmMenu;
+import com.lingan.ksm.entity.ksmRole;
+import com.lingan.ksm.entity.ksmUser;
 import com.lingan.ksm.mapper.MenuMapper;
 import com.lingan.ksm.model.menuModel;
 import com.lingan.ksm.model.menuTree;
 import com.lingan.ksm.service.MenuService;
+import com.lingan.ksm.service.RoleService;
+import com.lingan.ksm.service.UserService;
 
 @Service
 public class MenuImpl extends BaseServiceImpl<MenuMapper,ksmMenu> implements MenuService{
@@ -18,6 +22,11 @@ public class MenuImpl extends BaseServiceImpl<MenuMapper,ksmMenu> implements Men
 	@Autowired
 	MenuMapper mp;
 	
+	@Autowired
+	UserService us;
+	
+	@Autowired
+	RoleService rs;
 	@Override
 	public List<ksmMenu> getMenus() {
 		// TODO Auto-generated method stub
@@ -112,6 +121,11 @@ public class MenuImpl extends BaseServiceImpl<MenuMapper,ksmMenu> implements Men
 		
 	}
 
+	public List<ksmMenu> getMenusByRole(Integer roleId)
+	{
+		return mp.getMenusByRole(roleId);
+	}
+	
 	@Override
 	public List<menuTree> getMenuTree() {
 		
@@ -159,5 +173,45 @@ public class MenuImpl extends BaseServiceImpl<MenuMapper,ksmMenu> implements Men
 		if(children.size()==0)
 			return new ArrayList<menuTree>();
 		return children;
+	}
+
+	@Override
+	public List<menuTree> getMenuTreeByUser(String userName) {
+		// TODO Auto-generated method stub
+		ksmUser user=us.getUserByName(userName);
+		List<ksmRole> roles=rs.getRolesByUserName(user.getUserName());
+		List<ksmMenu> menus=new ArrayList<>();
+		for(ksmRole role:roles)
+		{
+			//System.out.print("roleId为"+role.getRoleId());
+			List<ksmMenu> temp=getMenusByRole(role.getRoleId());		
+			//System.out.print(temp);
+			if(temp!=null)
+			{
+				menus.addAll(temp);
+			
+			}
+		}
+		List<menuTree> models=new ArrayList<>();	
+		//System.out.print(menus);
+		//循环找出菜单根节点		
+		for(ksmMenu menu:menus)
+	    {
+			if(menu.getParentId()==0)
+	    	{	
+				//System.out.print("菜单数量为"+menu.getMenuName());
+	    		models.add(new menuTree(menu));
+	    	}
+	    }
+		
+		//System.out.print("根节点"+models);
+		
+	    for(menuTree model:models)
+	    {
+	        List<menuTree> child=getMenuChildren(model.getId(),menus);
+	    	model.setChildren(child);	      
+	    }
+	   // System.out.print("树已完成"+models);
+		return models;
 	}
 }

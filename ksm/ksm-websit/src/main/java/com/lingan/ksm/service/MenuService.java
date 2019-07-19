@@ -17,4 +17,5 @@ public interface MenuService extends IService<ksmMenu> {
 	List<menuModel> getMenuModels();
 	int addMenu2Role(Integer roleId,Integer MenuId);
 	List<menuTree> getMenuTree();
+	List<menuTree> getMenuTreeByUser(String userName);
 }

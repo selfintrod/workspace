@@ -55,6 +55,7 @@ public class KsmShiroConfig
 	        hashedCredentialsMatcher.setHashAlgorithmName(PasswordHelper.ALGORITHM_NAME); // 散列算法
 	        hashedCredentialsMatcher.setHashIterations(PasswordHelper.INT_ITERATIONS); // 散列次数
 	        return hashedCredentialsMatcher;
+	        //return null;
 	    }
 	
     @Bean(name="securitymanager")

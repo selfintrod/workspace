@@ -5,6 +5,7 @@ import java.util.List;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.lingan.ksm.entity.ksmRole;
 import com.lingan.ksm.entity.ksmUser;
+import com.lingan.ksm.utils.models.returnModel;
 
 public class UserModel extends ksmUser{
 
@@ -15,6 +16,18 @@ public class UserModel extends ksmUser{
 	
 	@TableField(exist=false)
 	private List<ksmRole> UserRoles;
+	
+	private returnModel returnModel;
+	
+	public returnModel getReturnModel()
+	{
+		return this.returnModel;
+	}
+		
+	public void setReturnModel(returnModel returnModel)
+	{
+		this.returnModel=returnModel;
+	}
 	
 	public void setUserName(String UserName)
 	{

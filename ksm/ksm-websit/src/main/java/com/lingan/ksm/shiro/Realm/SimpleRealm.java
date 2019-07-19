@@ -42,7 +42,7 @@ private shiroService service;
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {		
 		//usernamepasswordtoken与remember me
 		UsernamePasswordToken token2=(UsernamePasswordToken)token;
-		String username=token2.getUsername();// token有principak 账户名，credential 密码两个属性可以获取	
+		String username=token2.getUsername();// token有principal 账户名，credential 密码两个属性可以获取	
 		ksmUser user=service.getUserByName(username);
 		if(user==null)
 		{

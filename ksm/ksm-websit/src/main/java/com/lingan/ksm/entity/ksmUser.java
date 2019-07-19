@@ -72,4 +72,10 @@ public class ksmUser implements Serializable
 	{
 		return id;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "考试系统用户：用户ID["+this.id+"] 用户名["+this.userName+"] 用户密码["+this.passWord+"]";
+	}
 }

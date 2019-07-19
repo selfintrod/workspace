@@ -29,6 +29,11 @@ xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout">
     
 </head>
 <body class="layui-layout-body">
+<script th:inline="javascript">  
+/*<![CDATA[*/
+    var res=[[${session}]];
+/*]]>*/  
+</script>
 <script th:src="@{/layui/layui.js}"></script>
 <script th:src="@{/ksm/default.js}"></script>
 <div class="layui-layout layui-layout-admin">
@@ -36,7 +41,6 @@ xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout">
     <div class="layui-logo" id="logo">ksm考试系统</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
  <div id="menus" >
- fdasfasd
 </div>
 
     <ul class="layui-nav layui-layout-right">
@@ -49,7 +53,7 @@ xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout">
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="">退出</a></li>
+      <li class="layui-nav-item"><a href="http://localhost:8080/ksm/logout">退出</a></li>
     </ul>
   </div>
   
